@@ -102,13 +102,18 @@ def get_expert_response(expert_type, question):
 # 相談ボタン
 if st.button("🤖 相談する", type="primary"):
     if user_question.strip():
+        # レスポンス用のコンテナを作成
+        response_container = st.container()
+        
         with st.spinner("専門家が回答を考えています..."):
             response = get_expert_response(expert_type, user_question)
-            
-        st.markdown("## 💡 専門家からの回答")
-        st.markdown(f"**選択した専門家:** {expert_type}")
-        st.markdown("---")
-        st.markdown(response)
+        
+        # コンテナ内に結果を表示
+        with response_container:
+            st.markdown("## 💡 専門家からの回答")
+            st.markdown(f"**選択した専門家:** {expert_type}")
+            st.markdown("---")
+            st.markdown(response)
         
     else:
         st.warning("質問を入力してください。")
